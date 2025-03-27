@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\products;
+use App\Models\kategori;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -12,7 +13,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = products::all();
+        $products = products::with('kategori')->get();
         return view("admin.produk.products", compact("products"));
     }
 
@@ -22,16 +23,14 @@ class ProductsController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validate = $request->validate([
             "nama_barang"=> "required|string|max:255",
             "harga_barang"=> "required|numeric",
             "deskripsi_barang"=> "nullable|string",
-            "foto_barang"=> "nullable|image|mimes:jpeg,png,jpg,gif|max:2048"
+            "foto_barang"=> "nullable|image|mimes:jpeg,png,jpg,gif|max:2048",
+            "kategori_id" => "required"
         ]);
 
         $fotoPath = null;
@@ -40,10 +39,11 @@ class ProductsController extends Controller
         }
 
         products::create([
-            'nama_barang' => $validate(['nama_barang']),
-            'harga_barang' => $validate(['harga_barang']),
-            'deskripsi_barang' => $validate(['deskripsi_barang']),
+            'nama_barang' => $validate['nama_barang'],
+            'harga_barang' => $validate['harga_barang'],
+            'deskripsi_barang' => $validate['deskripsi_barang'] ?? null,
             'foto_barang' => $fotoPath,
+            "kategori_id" => $validate['kategori_id']
         ]);
         return redirect()->route('admin.produk.products')->with(['sukses' => 'Data Berhasil Dibuat']);
     }
@@ -75,7 +75,8 @@ class ProductsController extends Controller
             "nama_barang"=> "required|string|max:255",
             "harga_barang"=> "required|numeric",
             "deskripsi_barang"=> "nullable|string",
-            "foto_barang"=> "nullable|image|mimes:jpeg,png,jpg,gif|max:2048"
+            "foto_barang"=> "nullable|image|mimes:jpeg,png,jpg,gif|max:2048",
+            "kategori_id" => "required"
         ]);
 
         if($request->hasFile('foto_barang')){
@@ -92,7 +93,8 @@ class ProductsController extends Controller
         'nama_barang' => $request->nama_barang,
         'harga_barang' => $request->harga_barang,
         'deskripsi_barang' => $request->deskripsi_barang,
-        'foto_barang' => $products->foto_barang, // Simpan path baru
+        'foto_barang' => $products->foto_barang,
+        'kategori_id' => $request->kategori_id
     ]);
 
     return redirect()->route('products.index')->with('success', 'Produk berhasil diperbarui');

@@ -15,6 +15,7 @@ Route::get('/produk', function () {
     return view('admin.produk.products');
 })->name('products');
 Route::resource('produk', ProductsController::class);
+Route::resource('Kategori', KategoriController::class)->parameters(['Kategori' => 'kategori']);
 
 
 Route::get('/', function () {

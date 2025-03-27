@@ -16,6 +16,7 @@ class products extends Model
         'harga_barang',
         'deskripsi_barang',
         'foto_barang',
+        'kategori_id'
     ];
 
     public function kategori(){
