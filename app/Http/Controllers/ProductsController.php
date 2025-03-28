@@ -19,7 +19,8 @@ class ProductsController extends Controller
 
     public function create()
     {
-        return view("admin.produk.tambah");
+        $kategoris = Kategori::all();
+        return view("admin.produk.tambah", compact('kategoris'));
 
     }
 
@@ -30,14 +31,13 @@ class ProductsController extends Controller
             "harga_barang"=> "required|numeric",
             "deskripsi_barang"=> "nullable|string",
             "foto_barang"=> "nullable|image|mimes:jpeg,png,jpg,gif|max:2048",
-            "kategori_id" => "required"
+            "kategori_id" => "nullable"
         ]);
 
         $fotoPath = null;
-        if ($request->hasFile('foto')) {
-            $fotoPath = $request->file('foto')->store('uploads', 'public'); // Simpan di storage/app/public/uploads
+        if ($request->hasFile('foto_barang')) {
+            $fotoPath = $request->file('foto_barang')->store('uploads', 'public'); // Simpan di storage/app/public/uploads
         }
-
         products::create([
             'nama_barang' => $validate['nama_barang'],
             'harga_barang' => $validate['harga_barang'],
@@ -45,7 +45,8 @@ class ProductsController extends Controller
             'foto_barang' => $fotoPath,
             "kategori_id" => $validate['kategori_id']
         ]);
-        return redirect()->route('admin.produk.products')->with(['sukses' => 'Data Berhasil Dibuat']);
+
+        return redirect()->route('produk.index')->with(['sukses' => 'Data Berhasil Dibuat']);
     }
 
     /**
@@ -61,7 +62,8 @@ class ProductsController extends Controller
      */
     public function edit(products $products)
     {
-        return view("admin.produk.edit", compact("products"));
+        $kategoris = Kategori::all();
+        return view("admin.produk.edit", compact("products", "kategoris"));
 
 
     }
@@ -103,10 +105,10 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(products $products)
+    public function destroy($id)
     {
         {
-            $user = products::find($products);
+            $user = products::find($id);
     
             if ($user) {
                 $user->delete();

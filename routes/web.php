@@ -14,7 +14,7 @@ Route::resource('petugas', PetugasController::class)->parameters(['petugas' => '
 Route::get('/produk', function () {
     return view('admin.produk.products');
 })->name('products');
-Route::resource('produk', ProductsController::class);
+Route::resource('produk', ProductsController::class)->parameters(['produk' => 'products']);
 Route::resource('Kategori', KategoriController::class)->parameters(['Kategori' => 'kategori']);
 
 

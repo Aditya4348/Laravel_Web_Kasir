@@ -32,16 +32,30 @@
     <!-- Grid Produk -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         @foreach ($products as $produk)
-        <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-            <img src="{{ asset('storage/' . $produk->gambar) }}" alt="{{ $produk->nama_barang }}"
+        <div class="bg-white p-4 rounded-lg shadow-md transition duration-300 hover:shadow-lg">
+            <!-- Gambar Produk -->
+            <img src="{{ asset('storage/' . $produk->foto_barang) }}" alt="{{ $produk->nama_barang }}"
                 class="w-full h-40 object-cover rounded-md mb-4">
 
-            <h3 class="text-lg font-semibold">{{ $produk->nama_barang }}</h3>
-            <p class="text-gray-600 font-bold">Rp {{ number_format($produk->harga, 0, ',', '.') }}</p>
-            <p class="text-gray-500 text-sm mb-3">{{ Str::limit($produk->deskripsi, 50) }}</p>
+            <!-- Informasi Produk -->
+            <div class="space-y-2">
+                <!-- Nama Produk -->
+                <h3 class="text-lg font-semibold text-gray-800">{{ $produk->nama_barang }}</h3>
+
+                <!-- Kategori -->
+                <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-blue-500 text-white">
+                    {{ $produk->kategori->nama ?? 'Tidak ada kategori' }}
+                </span>
+
+                <!-- Harga Produk -->
+                <p class="text-gray-600 font-bold">{{ formatRupiah($produk->harga_barang) }}</p>
+
+                <!-- Deskripsi Singkat -->
+                <p class="text-gray-500 text-sm">{{ Str::limit($produk->deskripsi, 50) }}</p>
+            </div>
 
             <!-- Tombol Aksi -->
-            <div class="flex space-x-2">
+            <div class="flex space-x-2 mt-4">
                 <a href="{{ route('produk.edit', $produk->id) }}"
                     class="px-3 py-2 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 transition">
                     Edit

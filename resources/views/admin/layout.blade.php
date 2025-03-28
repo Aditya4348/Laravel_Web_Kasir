@@ -6,10 +6,10 @@
     <title>Admin Dashboard</title>
     @vite('resources/css/app.css') <!-- Pastikan path ini sesuai dengan proyekmu -->
 </head>
-<body class="font-sans antialiased bg-gray-100 overflow-y-hidden">
-    <div class="flex">
+<body class="font-sans antialiased bg-gray-100">
+    <div>
         <!-- Sidebar -->
-        <div class="w-64 bg-gray-800 text-white h-screen">
+        <div class="w-64 bg-gray-800 text-white h-screen fixed top-0 left-0">
             <div class="p-6">
                 <h2 class="text-2xl font-semibold">Kasir Admin</h2>
             </div>
@@ -38,7 +38,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 p-6">
+        <div class="flex-1 p-6 ml-64">
             <!-- Navbar -->
             <nav class="flex justify-between items-center bg-white p-4 shadow-md">
                 <h1 class="text-xl font-semibold">Dashboard</h1>

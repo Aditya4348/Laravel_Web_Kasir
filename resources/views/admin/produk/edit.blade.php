@@ -2,8 +2,9 @@
 
 @section('content')
 <div class="max-w-full mx-auto bg-white p-6 md:px-8 rounded-lg shadow-lg">
-    <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('produk.update', $products) }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PATCH')
 
         <!-- Alert -->
         @if(session('gagal'))
@@ -24,7 +25,7 @@
 
             <!-- Preview Foto Barang -->
             <div class="flex flex-col items-center">
-                <img id="preview-image" src="{{ asset('storage/default.png') }}" alt="Preview Gambar"
+                <img id="preview-image" src="{{ asset('storage/'. $products->foto_barang) }}" alt="{{$products->foto_barang}}"
                     class="w-64 h-64 object-cover border border-black rounded-md shadow-md">
             </div>
 
@@ -34,15 +35,15 @@
                 <div>
                     <label for="foto_barang" class="block text-sm font-medium text-gray-700">Foto Barang</label>
                     <input type="file" name="foto_barang" id="foto_barang" accept="image/*"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required
-                        onchange="previewFile()">
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                        onchange="previewFile()" value="{{$products->foto_barang}}">
                 </div>
 
                 <!-- Input Nama Barang -->
                 <div>
                     <label for="nama_barang" class="block text-sm font-medium text-gray-700">Nama Barang</label>
                     <input type="text" name="nama_barang" id="nama_barang"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required>
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="{{$products->nama_barang}}">
                     @error('nama_barang')
                     <p>{{$message}}</p>
                     @enderror
@@ -52,7 +53,7 @@
                 <div>
                     <label for="harga_barang" class="block text-sm font-medium text-gray-700">Harga</label>
                     <input type="text" name="harga_barang" id="harga_barang"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required>
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="{{$products->harga_barang}}">
                     @error('harga_barang')
                     <p>{{$message}}</p>
                     @enderror
@@ -62,10 +63,10 @@
                 <div>
                     <label for="kategori_id" class="block text-sm font-medium text-gray-700">Kategori</label>
                     <select name="kategori_id" id="kategori_id"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required>
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
                         <option value="" disabled selected>Pilih Kategori</option>
                         @foreach($kategoris as $kategori)
-                        <option name value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                        <option name value="{{ $kategori->nama }}">{{ $kategori->nama }}</option>
                         @endforeach
                     </select>
                     @error('kategori_id')
@@ -77,8 +78,7 @@
                 <div>
                     <label for="deskripsi_barang" class="block text-sm font-medium text-gray-700">Deskripsi</label>
                     <textarea name="deskripsi_barang" id="deskripsi_barang"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-                        required></textarea>
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value='{{$products->deskripsi_barang}}'></textarea>
                     @error('nama_barang')
                         <p>{{$message}}</p>
                     @enderror
