@@ -31,6 +31,7 @@ class ProductsController extends Controller
             "harga_barang"=> "required|numeric",
             "deskripsi_barang"=> "nullable|string",
             "foto_barang"=> "nullable|image|mimes:jpeg,png,jpg,gif|max:2048",
+            "stok_barang"=> 'nullable|integer',
             "kategori_id" => "nullable"
         ]);
 
@@ -41,12 +42,13 @@ class ProductsController extends Controller
         products::create([
             'nama_barang' => $validate['nama_barang'],
             'harga_barang' => $validate['harga_barang'],
+            "stok_barang"=> $validate['stok_barang'],
             'deskripsi_barang' => $validate['deskripsi_barang'] ?? null,
             'foto_barang' => $fotoPath,
             "kategori_id" => $validate['kategori_id']
         ]);
 
-        return redirect()->route('produk.index')->with(['sukses' => 'Data Berhasil Dibuat']);
+        return redirect()->route('produk.index')->with(['success' => 'Data Berhasil Dibuat']);
     }
 
     /**
@@ -76,6 +78,7 @@ class ProductsController extends Controller
         $request->validate([
             "nama_barang"=> "required|string|max:255",
             "harga_barang"=> "required|numeric",
+            "stok_barang" => "nullable|numeric",
             "deskripsi_barang"=> "nullable|string",
             "foto_barang"=> "nullable|image|mimes:jpeg,png,jpg,gif|max:2048",
             "kategori_id" => "required"
@@ -94,12 +97,13 @@ class ProductsController extends Controller
     $products->update([
         'nama_barang' => $request->nama_barang,
         'harga_barang' => $request->harga_barang,
+        'stok_barang' => $request->stok_barang,
         'deskripsi_barang' => $request->deskripsi_barang,
         'foto_barang' => $products->foto_barang,
         'kategori_id' => $request->kategori_id
     ]);
 
-    return redirect()->route('products.index')->with('success', 'Produk berhasil diperbarui');
+    return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui');
 }
 
     /**
@@ -112,7 +116,7 @@ class ProductsController extends Controller
     
             if ($user) {
                 $user->delete();
-                return back()->with('sukses', 'Data Berhasil Dihapus');
+                return back()->with('success', 'Data Berhasil Dihapus');
             }
             return back()->with('error', 'Data Gagal Dihapus');
         }

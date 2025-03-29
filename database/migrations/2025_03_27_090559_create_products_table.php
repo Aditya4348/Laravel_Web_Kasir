@@ -17,6 +17,7 @@ return new class extends Migration
             $table->double('harga_barang');
             $table->text('deskripsi_barang')->nullable();
             $table->string('foto_barang')->nullable();
+            $table->integer('stok_barang')->nullable();
             $table->unsignedBigInteger('kategori_id'); // ID kategori
 
             // Foreign key ke tabel kategori

@@ -6,18 +6,6 @@
         @csrf
         @method('PATCH')
 
-        <!-- Alert -->
-        @if(session('gagal'))
-        <div
-            class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 rounded-md shadow-md flex items-center space-x-2">
-            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-            <span>{{ session('gagal') }}</span>
-        </div>
-        @endif
-
         <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Tambah Produk</h2>
 
         <!-- Grid Layout -->
@@ -25,7 +13,8 @@
 
             <!-- Preview Foto Barang -->
             <div class="flex flex-col items-center">
-                <img id="preview-image" src="{{ asset('storage/'. $products->foto_barang) }}" alt="{{$products->foto_barang}}"
+                <img id="preview-image" src="{{ asset('storage/'. $products->foto_barang) }}"
+                    alt="{{$products->foto_barang}}"
                     class="w-64 h-64 object-cover border border-black rounded-md shadow-md">
             </div>
 
@@ -43,20 +32,33 @@
                 <div>
                     <label for="nama_barang" class="block text-sm font-medium text-gray-700">Nama Barang</label>
                     <input type="text" name="nama_barang" id="nama_barang"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="{{$products->nama_barang}}">
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                        value="{{$products->nama_barang}}">
                     @error('nama_barang')
                     <p>{{$message}}</p>
                     @enderror
                 </div>
 
                 <!-- Input Harga Barang -->
-                <div>
-                    <label for="harga_barang" class="block text-sm font-medium text-gray-700">Harga</label>
-                    <input type="text" name="harga_barang" id="harga_barang"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="{{$products->harga_barang}}">
-                    @error('harga_barang')
-                    <p>{{$message}}</p>
-                    @enderror
+                <div class="flex justify-between">
+                    <div>
+                        <label for="harga_barang" class="block text-sm font-medium text-gray-700">Harga</label>
+                        <input type="text" name="harga_barang" id="harga_barang"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                            value="{{$products->harga_barang}}">
+                        @error('harga_barang')
+                        <p>{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="stok_barang" class="block text-sm font-medium text-gray-700">Stok Barang</label>
+                        <input type="number" name="stok_barang" id="stok_barang"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                            value="{{$products->stok_barang}}">
+                        @error('stok_barang')
+                        <p>{{$message}}</p>
+                        @enderror
+                    </div>
                 </div>
 
                 <!-- Dropdown Kategori Barang -->
@@ -64,13 +66,15 @@
                     <label for="kategori_id" class="block text-sm font-medium text-gray-700">Kategori</label>
                     <select name="kategori_id" id="kategori_id"
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled selected>Pilih Kategori</option>
                         @foreach($kategoris as $kategori)
-                        <option name value="{{ $kategori->nama }}">{{ $kategori->nama }}</option>
+                        <option value="{{ $kategori->id }}" {{ old('kategori_id', $products->kategori_id ?? '') ==
+                            $kategori->id ? 'selected' : '' }}>
+                            {{ $kategori->nama }}
+                        </option>
                         @endforeach
                     </select>
                     @error('kategori_id')
-                        <p>{{$message}}</p>
+                    <p>{{$message}}</p>
                     @enderror
                 </div>
 
@@ -78,9 +82,10 @@
                 <div>
                     <label for="deskripsi_barang" class="block text-sm font-medium text-gray-700">Deskripsi</label>
                     <textarea name="deskripsi_barang" id="deskripsi_barang"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value='{{$products->deskripsi_barang}}'></textarea>
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                        value='{{$products->deskripsi_barang}}'></textarea>
                     @error('nama_barang')
-                        <p>{{$message}}</p>
+                    <p>{{$message}}</p>
                     @enderror
                 </div>
             </div>

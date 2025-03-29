@@ -5,16 +5,6 @@
     <form action="{{ route('petugas.store') }}" method="POST">
         @csrf
 
-        <!-- Alert -->
-        @if(session('gagal'))
-            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 rounded-md shadow-md flex items-center space-x-2">
-                <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-                <span>{{ session('gagal') }}</span>
-            </div>
-        @endif
-
         <h2 class="text-2xl font-semibold text-gray-700 mb-2 text-center">Edit Petugas</h2>
 
         <!-- Grid Layout -->
@@ -24,6 +14,9 @@
                 <label for="nama" class="block text-sm font-medium text-gray-700">Nama</label>
                 <input type="text" name="nama" id="nama" value=""
                     class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required>
+                @error('nama')
+                <p>{{$message}}</p>
+                @enderror
             </div>
 
             <!-- Input No Telepon -->
@@ -31,13 +24,29 @@
                 <label for="no_telepon" class="block text-sm font-medium text-gray-700">No Telepon</label>
                 <input type="text" name="no_telepon" id="no_telepon" value=""
                     class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required>
+                @error('no_telepon')
+                <p>{{$message}}</p>
+                @enderror
             </div>
 
             <!-- Input Username -->
             <div>
                 <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-                <input type="text" name="username" id="username" value=""
+                <input type="email" name="username" id="username" value=""
                     class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required>
+                @error('username')
+                <p>{{$message}}</p>
+                @enderror
+            </div>
+
+            <!-- Password Fields -->
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" name="password" id="password"
+                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                @error('password')
+                <p>{{$message}}</p>
+                @enderror
             </div>
         </div>
 
@@ -45,22 +54,11 @@
         <div class="mt-4">
             <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
             <textarea name="alamat" id="alamat"
-                class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required></textarea>
-        </div>
-
-        <!-- Password Fields -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" name="password" id="password"
-                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-            </div>
-
-            <div>
-                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
-                <input type="password" name="password_confirmation" id="password_confirmation"
-                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-            </div>
+                class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                required></textarea>
+            @error('alamat')
+            <p>{{$message}}</p>
+            @enderror
         </div>
 
         <!-- Submit Button -->

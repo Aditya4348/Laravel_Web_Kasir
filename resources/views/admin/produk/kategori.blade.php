@@ -10,11 +10,6 @@
         <span>{{ session('sukses') }}</span>
     </div>
 
-    <script>
-        setTimeout(function() {
-            document.getElementById('alert-success').style.display = 'none';
-        }, 2000); // 2000ms = 2 detik
-    </script>
 @endif
 
 @if(session('error'))
@@ -28,7 +23,9 @@
 
 
 <div class="bg-white p-6 rounded shadow">
-    <h2 class="text-2xl font-semibold mb-4">List Kategori</h2>
+    <h2 class="text-2xl font-semibold mb-4 flex items-center">
+        List Kategori
+    </h2>
     <div class="flex justify-between items-center">
         <p>Daftar kategori.</p>
         <a href="{{route('Kategori.create')}}">Tambah</a>

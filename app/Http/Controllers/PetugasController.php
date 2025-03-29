@@ -32,7 +32,7 @@ class PetugasController extends Controller
         ]);
         Petugas::create($validate);
 
-        return redirect()->route('admin.petugas')->with(['sukses' => 'Data Berhasil Dibuat']);
+        return redirect()->route('petugas.dashboard')->with(['sukses' => 'Data Berhasil Dibuat']);
     }
 
     public function show(Petugas $petugas)
@@ -62,7 +62,7 @@ class PetugasController extends Controller
         $petugas->username = $request->username;
         $petugas->update();
 
-        return redirect()->route('admin.petugas')->with(['sukses' => 'Data Berhasil Diupdate']);
+        return redirect()->route('petugas.dashboard')->with(['sukses' => 'Data Berhasil Diupdate']);
     }
 
 

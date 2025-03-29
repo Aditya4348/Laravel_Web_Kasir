@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('petugas') }}" class="flex items-center text-white px-4 py-2 hover:bg-gray-700 rounded">
+                    <a href="{{ route('petugas.dashboard') }}" class="flex items-center text-white px-4 py-2 hover:bg-gray-700 rounded">
                         <i class="fas fa-users mr-3"></i> List Petugas
                     </a>
                 </li>
@@ -56,5 +56,10 @@
 
     <!-- Add FontAwesome for Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        setTimeout(function() {
+            document.getElementById('alert-success').style.display = 'none';
+        }, 2000); // 2000ms = 2 detik
+    </script>
 </body>
 </html>

@@ -1,6 +1,26 @@
 @extends('admin.layout')
 
 @section('content')
+
+<!-- Alert -->
+@if(session('success'))
+    <div id="alert-success" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md shadow-md flex items-center space-x-2 mb-2">
+        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>{{ session('success') }}</span>
+    </div>
+@elseif(session('error'))
+<div
+    class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 rounded-md shadow-md flex items-center space-x-2">
+    <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+    <span>{{ session('error') }}</span>
+</div>
+@endif
+
 <div class="bg-white p-6 rounded shadow">
     <div class="flex justify-between items-center flex-row">
         <div>
@@ -43,9 +63,16 @@
                 <h3 class="text-lg font-semibold text-gray-800">{{ $produk->nama_barang }}</h3>
 
                 <!-- Kategori -->
-                <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-blue-500 text-white">
-                    {{ $produk->kategori->nama ?? 'Tidak ada kategori' }}
-                </span>
+                <div class="flex gap-2">
+                    <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-blue-500 text-white">
+                        {{ $produk->kategori->nama ?? 'Tidak ada kategori' }}
+                    </span>
+
+                    <span class="text-xs font-medium px-2.5 py-1 rounded-md text-white {{$produk->stok_barang == 0 ? 'bg-red-500' : 'bg-blue-500'}}">
+                        {{ $produk->stok_barang == 0 ? 'Stok Habis' : 'Stok Barang: '. $produk->stok_barang }}
+                    </span>
+                    
+                </div>
 
                 <!-- Harga Produk -->
                 <p class="text-gray-600 font-bold">{{ formatRupiah($produk->harga_barang) }}</p>

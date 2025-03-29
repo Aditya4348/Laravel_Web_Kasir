@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/list', [PetugasController::class, 'index'], function () {
     return view('admin.petugas');
-})->name('petugas');
+})->name('petugas.dashboard');
 Route::resource('petugas', PetugasController::class)->parameters(['petugas' => 'petugas']);
 
 Route::get('/produk', function () {
@@ -18,17 +18,15 @@ Route::resource('produk', ProductsController::class)->parameters(['produk' => 'p
 Route::resource('Kategori', KategoriController::class)->parameters(['Kategori' => 'kategori']);
 
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->name('dashboard');
 
 
+Route::get('/', function () {
+    return view('welcome');
+})->name('login');
 
 
 
 
-
-Route::middleware(['auth', 'role:admin'])->group( function(){
-    
-
-});
