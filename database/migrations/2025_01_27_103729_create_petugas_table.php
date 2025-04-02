@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('no_telepon', 12); // Kolom no_telepon
             $table->text('alamat'); // Kolom alamat
             $table->string('username',20)->unique(); // Kolom username
+            $table->enum('role',['admin', 'petugas']); // Kolom username
             $table->string('password',100); // Kolom password
             $table->timestamps();
         });

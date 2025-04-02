@@ -83,7 +83,7 @@
                     <label for="deskripsi_barang" class="block text-sm font-medium text-gray-700">Deskripsi</label>
                     <textarea name="deskripsi_barang" id="deskripsi_barang"
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-                        value='{{$products->deskripsi_barang}}'></textarea>
+                        >{{$products->deskripsi_barang}}</textarea>
                     @error('nama_barang')
                     <p>{{$message}}</p>
                     @enderror

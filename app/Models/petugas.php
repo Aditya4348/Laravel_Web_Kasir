@@ -18,6 +18,7 @@ class Petugas extends Model
         'no_telepon',
         'alamat',
         'username',
+        'role',
         'password',
     ];
 
