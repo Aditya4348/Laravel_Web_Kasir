@@ -26,7 +26,7 @@
                     <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi Kategori</label>
                     <textarea name="deskripsi" id="deskripsi"
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-                        value="{{$kategori->deskripsi}}"></textarea>
+                        >{{$kategori->deskripsi}}</textarea>
                 </div>
             </div>
         </div>

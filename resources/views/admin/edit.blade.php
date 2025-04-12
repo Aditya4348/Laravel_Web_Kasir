@@ -3,6 +3,18 @@
 @section('content')
 <div class="max-w-full mx-auto bg-white p-6 md:p-5 rounded-lg shadow-lg">
 
+    @error(session('error'))
+    <div
+        class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md shadow-md flex items-center space-x-2 mb-2">
+        <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+        <span>Data Gagal Diupdate</span>
+    </div>
+    @enderror
+
+
     <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">Edit Petugas</h2>
 
     <form action="{{ route('petugas.update', $petugas->id) }}" method="POST">

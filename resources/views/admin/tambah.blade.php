@@ -32,7 +32,7 @@
             <!-- Input Username -->
             <div>
                 <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-                <input type="email" name="username" id="username" value=""
+                <input type="text" name="username" id="username" value=""
                     class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required>
                 @error('username')
                 <p>{{$message}}</p>

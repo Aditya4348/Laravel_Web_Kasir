@@ -10,10 +10,10 @@ class PetugasController extends Controller
 
     public function index()
     {
-        $petugas = Petugas::all();
+        $petugas = Petugas::all()->where('role', 'petugas');
+
         return view('admin.petugas', compact('petugas'));
     }
-
 
     public function create()
     {
@@ -32,7 +32,7 @@ class PetugasController extends Controller
         ]);
         Petugas::create($validate);
 
-        return redirect()->route('petugas.dashboard')->with(['sukses' => 'Data Berhasil Dibuat']);
+        return redirect()->route('dashboard')->with(['sukses' => 'Data Berhasil Dibuat']);
     }
 
     public function show(Petugas $petugas)
@@ -49,20 +49,26 @@ class PetugasController extends Controller
     public function update(Request $request, Petugas $petugas)
     {
         // Validasi input
-        $request->validate([
+        $data = $request->validate([
             'nama' => 'required|string|max:255',
             'no_telepon' => 'required|string|max:15',
             'alamat' => 'required|string',
             'username' => 'required|unique:petugas,username,' . $petugas->id,
         ]);
 
-        $petugas->nama = $request->nama;
-        $petugas->no_telepon = $request->no_telepon;
-        $petugas->alamat = $request->alamat;
-        $petugas->username = $request->username;
-        $petugas->update();
+        //pengecekan jika validasi berhasil update data 
+        if($data){
+            $petugas->nama = $data['nama'];
+            $petugas->no_telepon = $data['no_telepon'];
+            $petugas->alamat = $data['alamat'];
+            $petugas->username = $data['username'];
+            $petugas->update();
 
-        return redirect()->route('petugas.dashboard')->with(['sukses' => 'Data Berhasil Diupdate']);
+        return redirect()->route('petugas.index')->with(['sukses' => 'Data Berhasil Diupdate']);
+        }
+
+        //jika gagal kembalikan dengan pesan error
+        return back()->with('error', 'Data Gagal Diupdate');        
     }
 
 

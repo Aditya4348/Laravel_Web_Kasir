@@ -41,6 +41,7 @@
                     <th class="px-6 py-3 border-b text-center">No Telepon</th>
                     <th class="px-6 py-3 border-b text-center">Alamat</th>
                     <th class="px-6 py-3 border-b text-center">Username</th>
+                    <th class="px-6 py-3 border-b text-center">Role</th>
                     <th class="px-6 py-3 border-b text-center">Aksi</th>
                 </tr>
             </thead>
@@ -52,6 +53,7 @@
                         <td class="px-6 py-4 border-b text-center">{{$isi->no_telepon}}</td>
                         <td class="px-6 py-4 border-b text-center">{{$isi->alamat}}</td>
                         <td class="px-6 py-4 border-b text-center">{{$isi->username}}</td>
+                        <td class="px-6 py-4 border-b text-center">{{$isi->role}}</td>
                         <td class="px-6 py-4 border-b text-blue-500 cursor-pointer flex">
                             <a href="{{route('petugas.edit', $isi->id)}}"
                                 class="inline-block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 mb-2 md:mb-0 md:mr-2">
