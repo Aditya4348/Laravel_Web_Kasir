@@ -26,9 +26,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 })->name('admin');
 
 Route::middleware(['auth', 'role:petugas'])->group(function () {
-    Route::get('/petugas/dashboard', function () {
-        return view('petugas.dashboard');
-    })->name('petugas.dashboard');
+   
 })->name('petugas');
 
-
+    Route::prefix('petugas')->name('petugas.')->group(function () {
+        Route::get('/pembelian', fn() => view('petugas.pembelian'))->name('pembelian');
+        Route::get('/produk', fn() => view('petugas.produk'))->name('produk');
+        Route::get('/laporan', fn() => view('petugas.laporan'))->name('laporan');
+    });

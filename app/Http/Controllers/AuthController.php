@@ -45,7 +45,7 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
 
-        return redirect()->route('petugas.dashboard')->with('success', 'Login berhasil!');
+        return redirect()->route('petugas');
     }
 
     public function logout()
