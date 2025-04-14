@@ -63,9 +63,9 @@
 
                 <!-- Dropdown Kategori Barang -->
                 <div>
-                    <label for="kategori_id" class="block text-sm font-medium text-gray-700">Kategori</label>
-                    <select name="kategori_id" id="kategori_id"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" required>
+                    <label for="kategori_id" class="block font-medium mb-2">Pilih Produk</label>
+                    <select id="kategori_id" name="kategori_id[]" multiple placeholder="Pilih Kategori..."
+                        autocomplete="off" class="w-full border border-gray-300 rounded p-2">
                         <option value="" disabled selected>Pilih Kategori</option>
                         @foreach($kategoris as $kategori)
                         <option name value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
@@ -75,6 +75,7 @@
                     <p>{{$message}}</p>
                     @enderror
                 </div>
+
 
                 <!-- Input Deskripsi Barang -->
                 <div>

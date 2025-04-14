@@ -18,6 +18,6 @@ class kategori extends Model
     ];
 
     public function products(){
-        return $this->hasMany(products::class);
+        return $this->belongsToMany(products::class,'kategori_produk', 'kategori_id', 'produk_id');
     }
 }

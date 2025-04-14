@@ -63,14 +63,13 @@
 
                 <!-- Dropdown Kategori Barang -->
                 <div>
-                    <label for="kategori_id" class="block text-sm font-medium text-gray-700">Kategori</label>
-                    <select name="kategori_id" id="kategori_id"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                    <label for="kategori_id" class="block font-medium mb-2">Pilih Produk</label>
+                    <select id="kategori_id" name="kategori_id[]" multiple placeholder="Pilih Kategori..."
+                        autocomplete="off" class="w-full border border-gray-300 rounded p-2">
+                        <option value="" disabled selected>Pilih Kategori</option>
                         @foreach($kategoris as $kategori)
-                        <option value="{{ $kategori->id }}" {{ old('kategori_id', $products->kategori_id ?? '') ==
-                            $kategori->id ? 'selected' : '' }}>
-                            {{ $kategori->nama }}
-                        </option>
+                        <option name value="{{ $kategori->id }}" {{ $products->kategori->contains($kategori->id) ? 'selected' : '' }}>
+                            {{ $kategori->nama }}</option>
                         @endforeach
                     </select>
                     @error('kategori_id')

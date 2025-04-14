@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <!-- Tambahkan di layout -->
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
     @vite('resources/css/app.css')
 </head>
+
 <body class="font-sans antialiased bg-gray-100">
     <div class="flex">
         <!-- Sidebar -->
@@ -15,24 +21,28 @@
             </div>
             <ul class="mt-6 space-y-2">
                 <li>
-                    <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 transition duration-300 rounded-lg">
+                    <a href="{{ route('dashboard') }}"
+                        class="flex items-center px-4 py-3 hover:bg-gray-700 transition duration-300 rounded-lg">
                         <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('produk.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 transition duration-300 rounded-lg">
+                    <a href="{{ route('produk.index') }}"
+                        class="flex items-center px-4 py-3 hover:bg-gray-700 transition duration-300 rounded-lg">
                         <i class="fas fa-box mr-3"></i> List Produk
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('petugas.index') }}" class="flex items-center px-4 py-3 hover:bg-gray-700 transition duration-300 rounded-lg">
+                    <a href="{{ route('petugas.index') }}"
+                        class="flex items-center px-4 py-3 hover:bg-gray-700 transition duration-300 rounded-lg">
                         <i class="fas fa-users mr-3"></i> List Petugas
                     </a>
                 </li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST" class="w-full">
                         @csrf
-                        <button type="submit" class="w-full text-left px-4 py-3 hover:bg-red-600 transition duration-300 rounded-lg">
+                        <button type="submit"
+                            class="w-full text-left px-4 py-3 hover:bg-red-600 transition duration-300 rounded-lg">
                             <i class="fas fa-sign-out-alt mr-3"></i> Logout
                         </button>
                     </form>
@@ -67,5 +77,13 @@
             }
         }, 2000);
     </script>
+    <script>
+        new TomSelect("#produk", {
+          plugins: ['remove_button'],
+          persist: false,
+          create: false
+        });
+      </script>
 </body>
+
 </html>
